@@ -1,0 +1,281 @@
+﻿<Window x:Class="PuttingLeaguePro.ScoringView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuttingLeaguePro"
+        mc:Ignorable="d"
+        xmlns:models="clr-namespace:Models;assembly=Models"
+        Title="Scoring" Height="600" Width="800" WindowState="Maximized">
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <!-- Current Team -->
+        <GroupBox Grid.Row="0" Margin="8" Padding="12">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding CurrentTeamScore.TeamName, StringFormat='{}{0}: '}" FontSize="72" />
+                    <TextBlock Text="{Binding CurrentTeamScore.CurrentScore}" FontSize="72" />
+                </StackPanel>
+            </GroupBox.Header>
+
+            <Grid>
+                <Grid.Resources>
+                    <Style x:Key="checkBoxStyle" TargetType="CheckBox">
+                        <Setter Property="LayoutTransform">
+                            <Setter.Value>
+                                <ScaleTransform ScaleX="1.75" ScaleY="1.75" />
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="FontSize" Value="36" />
+                        <Setter Property="HorizontalAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="Grid.Row" Value="1" />
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Content="{Binding PointValueHeaders[0]}" IsChecked="{Binding PointValue1}" IsEnabled="{Binding PointValue1IsEnabled}" Grid.Column="1">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue1IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <CheckBox Content="{Binding PointValueHeaders[1]}" IsChecked="{Binding PointValue2}" IsEnabled="{Binding PointValue2IsEnabled}" Grid.Column="2">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue2IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <CheckBox Content="{Binding PointValueHeaders[2]}" IsChecked="{Binding PointValue3}" IsEnabled="{Binding PointValue3IsEnabled}" Grid.Column="3">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue3IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <CheckBox Content="{Binding PointValueHeaders[3]}" IsChecked="{Binding PointValue4}" IsEnabled="{Binding PointValue4IsEnabled}" Grid.Column="4">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue4IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <CheckBox Content="{Binding PointValueHeaders[4]}" IsChecked="{Binding PointValue5}" IsEnabled="{Binding PointValue5IsEnabled}" Grid.Column="5">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue5IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <CheckBox Content="{Binding PointValueHeaders[5]}" IsChecked="{Binding PointValue6}" IsEnabled="{Binding PointValue6IsEnabled}" Grid.Column="6">
+                    <CheckBox.Style>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource checkBoxStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValue6IsEnabled}" Value="False">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+
+                <Button Content="Turn Complete" Width="100" Command="{Binding TurnCompleted}" HorizontalAlignment="Left" Margin="4,12,4,4" Grid.Row="2" Grid.ColumnSpan="7" />
+            </Grid>
+        </GroupBox>
+        
+        <!-- Scoreboard -->
+        <DataGrid x:Name="scoreGrid" ItemsSource="{Binding TeamScores}" SelectedItem="{Binding SelectedTeamScore}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Grid.Row="1" Margin="8"
+                  GridLinesVisibility="None">
+            <DataGrid.Resources>
+                
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="FontSize" Value="36" />
+                </Style>
+
+                <Style x:Key="checkBoxCellStyle" TargetType="DataGridCell">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridCell">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="2" ScaleY="2" />
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="FontSize" Value="36" />
+                </Style>
+                
+            </DataGrid.Resources>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit Round Scores" Command="{Binding EditSelectedTeamScore}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn Header="Order" Binding="{Binding Order, Mode=OneWay}" FontSize="36" />-->
+                <DataGridTextColumn Header="Team" Binding="{Binding TeamName, Mode=OneWay}" FontSize="36">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="36" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Score" Binding="{Binding CurrentScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="36">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="FontSize" Value="36" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+
+                <!-- Point Value 1 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[0].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[0], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[0].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+                <!-- Point Value 2 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[1].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[1], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[1].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+                <!-- Point Value 3 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[2].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[2], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[2].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+                
+                <!-- Point Value 4 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[3].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[3], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[3].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+                
+                <!-- Point Value 5 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[4].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[4], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[4].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+                <!-- Point Value 6 -->
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[5].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.Header>
+                        <TextBlock Text="{Binding DataContext.PointValueHeaders[5], ElementName=grid}" HorizontalAlignment="Center" />
+                    </DataGridCheckBoxColumn.Header>
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource checkBoxCellStyle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding PointValuesHit[5].HitLastRound}" Value="True">
+                                    <Setter Property="Background" Value="#FF1BB02F" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        
+    </Grid>
+</Window>
