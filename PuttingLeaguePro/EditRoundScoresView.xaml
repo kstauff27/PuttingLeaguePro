@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PuttingLeaguePro"
         mc:Ignorable="d"
-        Title="Edit Round Scores" Height="500" Width="500" WindowStartupLocation="CenterOwner"
+        Title="Edit Round Scores" Height="600" Width="800" WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
@@ -30,9 +30,9 @@
         <DataGrid ItemsSource="{Binding RoundScores}" SelectedItem="{Binding SelectedRoundScore}" Grid.Row="1" Grid.Column="1"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="RoundScoreID" Binding="{Binding RoundScoreID, Mode=OneWay}" />
+                <!--<DataGridTextColumn Header="RoundScoreID" Binding="{Binding RoundScoreID, Mode=OneWay}" />
                 <DataGridTextColumn Header="GameID" Binding="{Binding GameID, Mode=OneWay}" />
-                <DataGridTextColumn Header="TeamID" Binding="{Binding TeamID, Mode=OneWay}" />
+                <DataGridTextColumn Header="TeamID" Binding="{Binding TeamID, Mode=OneWay}" />-->
                 <DataGridTextColumn Header="Round" Binding="{Binding Round}" />
                 <DataGridTextColumn Header="Points" Binding="{Binding Points}" />
             </DataGrid.Columns>
