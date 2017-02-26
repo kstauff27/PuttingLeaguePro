@@ -14,6 +14,7 @@ namespace ViewModels
         private PuttingLeagueDb _dataManager = null;
         private int _gameID = 0;
         private int _teamID = 0;
+        private int _currentRound = 0;
 
         private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
         private Team _selectedTeam = null;
@@ -22,12 +23,16 @@ namespace ViewModels
         private ObservableCollection<RoundScore> _roundScores = new ObservableCollection<RoundScore>();
         private RoundScore _selectedRoundScore = null;
 
+        private ObservableCollection<int> _roundOptions = new ObservableCollection<int>();
+        private ObservableCollection<int> _pointOptions = new ObservableCollection<int>();
+
         // Constructor
-        public EditRoundScoresViewModel(PuttingLeagueDb db, int gameID, int teamID)
+        public EditRoundScoresViewModel(PuttingLeagueDb db, int gameID, int teamID, int currentRound)
         {
             _dataManager = db;
             _gameID = gameID;
             _teamID = teamID;
+            _currentRound = currentRound;
 
             // Get the game
             Game game = _dataManager.Games.SingleOrDefault(e => e.GameID == _gameID);
@@ -39,6 +44,15 @@ namespace ViewModels
             // Get all of the round scores
             foreach (RoundScore rs in game.RoundScores)
                 _allRoundScores.Add(rs);
+
+            // Get the round options
+            for (int i = 1; i <= _currentRound; i++)
+                _roundOptions.Add(i);
+
+            // Get the point options
+            _pointOptions.Add(0);
+            foreach (PointValue pv in game.PointValues)
+                _pointOptions.Add(pv.Points);
 
             // Set the entity state to detached so changes aren't automatically saved
             foreach (RoundScore rs in _allRoundScores)
@@ -75,6 +89,56 @@ namespace ViewModels
             {
                 _selectedRoundScore = value;
                 RaisePropertyChanged("SelectedRoundScore");
+            }
+        }
+
+        public ObservableCollection<int> RoundOptions
+        {
+            get { return _roundOptions; }
+        }
+        public int RoundOptionSetter
+        {
+            get
+            {
+                int val = _roundOptions.FirstOrDefault();
+
+                if (_selectedRoundScore != null)
+                    val = _selectedRoundScore.Round;
+
+                return val;
+            }
+            set
+            {
+                if(_selectedRoundScore != null)
+                {
+                    _selectedRoundScore.Round = value;
+                    RaisePropertyChanged("RoundOptionSetter");
+                }
+            }
+        }
+
+        public ObservableCollection<int> PointOptions
+        {
+            get { return _pointOptions; }
+        }
+        public int PointOptionSetter
+        {
+            get
+            {
+                int val = _pointOptions.FirstOrDefault();
+
+                if (_selectedRoundScore != null)
+                    val = _selectedRoundScore.Points;
+
+                return val;
+            }
+            set
+            {
+                if(_selectedRoundScore != null)
+                {
+                    _selectedRoundScore.Points = value;
+                    RaisePropertyChanged("PointOptionSetter");
+                }
             }
         }
 

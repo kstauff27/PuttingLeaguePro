@@ -30,7 +30,7 @@ namespace PuttingLeaguePro
 
         private void OnEditRoundScores(EditRoundScoresData data)
         {
-            EditRoundScoresViewModel vm = new EditRoundScoresViewModel(data.DataManager, data.GameID, data.TeamID);
+            EditRoundScoresViewModel vm = new EditRoundScoresViewModel(data.DataManager, data.GameID, data.TeamID, data.CurrentRound);
             EditRoundScoresView view = new EditRoundScoresView() { DataContext = vm, Owner = this.MainWindow };
 
             view.ShowDialog();

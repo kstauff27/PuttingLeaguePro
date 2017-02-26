@@ -89,6 +89,9 @@ namespace ViewModels
 
         // Commands
         private RelayCommand _addPlayer;
+        private RelayCommand _startGame;
+        private RelayCommand _selectAllPlayers;
+
         public ICommand AddPlayer
         {
             get
@@ -102,7 +105,34 @@ namespace ViewModels
                 return _addPlayer;
             }
         }
+        public ICommand StartGame
+        {
+            get
+            {
+                if (_startGame == null)
+                {
+                    _startGame = new RelayCommand(
+                        param => startGame(),
+                        param => startGameCanExecute());
+                }
+                return _startGame;
+            }
+        }
+        public ICommand SelectAllPlayers
+        {
+            get
+            {
+                if(_selectAllPlayers == null)
+                {
+                    _selectAllPlayers = new RelayCommand(
+                        param => selectAllPlayers(),
+                        param => selectAllPlayersCanExecute());
+                }
+                return _selectAllPlayers;
+            }
+        }
 
+        // Command Methods
         private void addPlayer()
         {
             Player p = new Player() { Name = _newPlayerName, Included = true };
@@ -116,22 +146,6 @@ namespace ViewModels
         private bool addPlayerCanExecute()
         {
             return _newPlayerName.Trim() != string.Empty;
-        }
-
-
-        private RelayCommand _startGame;
-        public ICommand StartGame
-        {
-            get
-            {
-                if (_startGame == null)
-                {
-                    _startGame = new RelayCommand(
-                        param => startGame(),
-                        param => startGameCanExecute());
-                }
-                return _startGame;
-            }
         }
 
         private void startGame()
@@ -159,6 +173,16 @@ namespace ViewModels
         private bool startGameCanExecute()
         {
             return _pointValues.Count > 0 && _players.Count > 0;
+        }
+
+        private void selectAllPlayers()
+        {
+            foreach (Player player in _players)
+                player.Included = true;
+        }
+        private bool selectAllPlayersCanExecute()
+        {
+            return _players.Count > 0;
         }
 
         // Helper Methods

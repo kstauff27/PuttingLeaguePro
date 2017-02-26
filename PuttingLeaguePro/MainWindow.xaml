@@ -44,7 +44,7 @@
                           AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="4,0,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Position" Width="*" Binding="{Binding Index, Mode=OneWay}" />
-                        <DataGridTextColumn Header="Points" Width="*" Binding="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridTextColumn Header="Points (Editable)" Width="*" Binding="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 
@@ -60,6 +60,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -71,7 +72,9 @@
                 <TextBox Text="{Binding NewPlayerName}" TextChanged="NewPlayerNameChanged" KeyDown="AddNewPlayerOnEnter" Grid.Row="1" Grid.Column="0" Margin="0,0,4,8" />
                 <Button Content="Add Player" Command="{Binding AddPlayer}" Width="100" Grid.Row="1" Grid.Column="1" Margin="4,0,0,8" />
 
-                <DataGrid ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}" Grid.Row="2" Grid.ColumnSpan="2"
+                <Button Content="Include All" Command="{Binding SelectAllPlayers}" Width="100" Grid.Row="2" Margin="0,0,0,8" HorizontalAlignment="Left" />
+
+                <DataGrid ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}" Grid.Row="3" Grid.ColumnSpan="2"
                   AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="Included" Width="60" Binding="{Binding Included, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
