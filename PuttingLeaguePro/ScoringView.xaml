@@ -130,7 +130,12 @@
                 
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="FontSize" Value="36" />
+                    <Setter Property="FontSize" Value="28" />
+                </Style>
+
+                <Style x:Key="textColumnHeader" TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="FontSize" Value="28" />
                 </Style>
 
                 <Style x:Key="checkBoxCellStyle" TargetType="DataGridCell">
@@ -148,9 +153,9 @@
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </Setter.Value>
                     </Setter>
-                    <Setter Property="FontSize" Value="36" />
+                    <Setter Property="FontSize" Value="28" />
                 </Style>
-                
+
             </DataGrid.Resources>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -159,23 +164,9 @@
             </DataGrid.ContextMenu>
             
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="Order" Binding="{Binding Order, Mode=OneWay}" FontSize="36" />-->
-                <DataGridTextColumn Header="Team" Binding="{Binding TeamName, Mode=OneWay}" FontSize="36">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="FontSize" Value="36" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Score" Binding="{Binding CurrentScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="36">
-                    <DataGridTextColumn.HeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="FontSize" Value="36" />
-                        </Style>
-                    </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                <DataGridTextColumn Header="Order" Binding="{Binding Order, Mode=OneWay}" FontSize="28" HeaderStyle="{StaticResource textColumnHeader}" />
+                <DataGridTextColumn Header="Team" Binding="{Binding TeamName, Mode=OneWay}" FontSize="28" HeaderStyle="{StaticResource textColumnHeader}" />
+                <DataGridTextColumn Header="Score" Binding="{Binding CurrentScore, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontSize="28" HeaderStyle="{StaticResource textColumnHeader}" />
 
                 <!-- Point Value 1 -->
                 <DataGridCheckBoxColumn Width="*" Binding="{Binding PointValuesHit[0].Completed, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
