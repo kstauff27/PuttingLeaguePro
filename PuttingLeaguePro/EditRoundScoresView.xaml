@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Edit Round Scores" Height="600" Width="800" WindowStartupLocation="CenterOwner"
         Closing="Window_Closing">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -33,8 +33,33 @@
                 <!--<DataGridTextColumn Header="RoundScoreID" Binding="{Binding RoundScoreID, Mode=OneWay}" />
                 <DataGridTextColumn Header="GameID" Binding="{Binding GameID, Mode=OneWay}" />
                 <DataGridTextColumn Header="TeamID" Binding="{Binding TeamID, Mode=OneWay}" />-->
-                <DataGridTextColumn Header="Round" Binding="{Binding Round}" />
-                <DataGridTextColumn Header="Points" Binding="{Binding Points}" />
+                
+                <DataGridTemplateColumn Header="Round">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Round, Mode=OneWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox DataContext="{Binding DataContext, ElementName=grid}" ItemsSource="{Binding RoundOptions}" SelectedItem="{Binding RoundOptionSetter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Points">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Points, Mode=OneWay}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox DataContext="{Binding DataContext, ElementName=grid}" ItemsSource="{Binding PointOptions}" SelectedItem="{Binding PointOptionSetter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
 

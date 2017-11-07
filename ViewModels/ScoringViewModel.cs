@@ -289,7 +289,7 @@ namespace ViewModels
 
         private void editSelectedTeamScore()
         {
-            EditRoundScoresData data = new EditRoundScoresData() { DataManager = _dataManager, GameID = _game.GameID, TeamID = _selectedTeamScore.TeamID };
+            EditRoundScoresData data = new EditRoundScoresData() { DataManager = _dataManager, GameID = _game.GameID, TeamID = _selectedTeamScore.TeamID, CurrentRound = _roundNumber };
             EventAggregator.GetEvent<LaunchEditRoundScores>().Publish(data);
 
             foreach(TeamScore teamScore in _teamScores)
@@ -486,5 +486,6 @@ namespace ViewModels
         public PuttingLeagueDb DataManager { get; set; }
         public int GameID { get; set; }
         public int TeamID { get; set; }
+        public int CurrentRound { get; set; }
     }
 }

@@ -50,7 +50,7 @@
                           AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Margin="4,0,0,0">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Position" Width="*" Binding="{Binding Index, Mode=OneWay}" />
-                        <DataGridTextColumn Header="Points" Width="*" Binding="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridTextColumn Header="Points (Editable)" Width="*" Binding="{Binding Points, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
                 </DataGrid>
                 

@@ -171,6 +171,7 @@ namespace ViewModels
             }
         }
 
+        // Command Methods
         private void addPlayer()
         {
             Player p = new Player() { Name = _newPlayerName, Included = true };
