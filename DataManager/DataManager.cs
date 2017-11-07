@@ -8,13 +8,14 @@ namespace DataManager
         public PuttingLeagueDb() 
             : base("PuttingLeagueDb")
         {
-        }   
+        }
 
         public DbSet<DefaultPointValue> DefaultPointValues { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<PointValue> PointValues { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamPlayer> TeamPlayers { get; set; }
         public DbSet<RoundScore> RoundScores { get; set; }
     }
 

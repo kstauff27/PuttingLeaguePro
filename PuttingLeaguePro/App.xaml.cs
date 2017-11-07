@@ -18,6 +18,7 @@ namespace PuttingLeaguePro
 
             EventManagerInstance.Instance.GetEvent<LaunchNewGame>().Subscribe(OnLaunchNewGame);
             EventManagerInstance.Instance.GetEvent<LaunchEditRoundScores>().Subscribe(OnEditRoundScores);
+            EventManagerInstance.Instance.GetEvent<LaunchScoringLeaders>().Subscribe(OnDisplayScoringLeaders);
         }
 
 		private void OnLaunchNewGame(int gameID)
@@ -32,6 +33,14 @@ namespace PuttingLeaguePro
         {
             EditRoundScoresViewModel vm = new EditRoundScoresViewModel(data.DataManager, data.GameID, data.TeamID);
             EditRoundScoresView view = new EditRoundScoresView() { DataContext = vm, Owner = this.MainWindow };
+
+            view.ShowDialog();
+        }
+
+        private void OnDisplayScoringLeaders()
+        {
+            ScoringLeadersViewModel vm = new ScoringLeadersViewModel();
+            ScoringLeaders view = new ScoringLeaders() { DataContext = vm, Owner = this.MainWindow };
 
             view.ShowDialog();
         }

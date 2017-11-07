@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DefaultPointValue.cs" />
     <Compile Include="Display Models\PointValueHit.cs" />
+    <Compile Include="Display Models\ScoringTotal.cs" />
     <Compile Include="Display Models\TeamScore.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Player.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundScore.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TeamPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreStuff\CoreStuff.csproj">

@@ -8,7 +8,7 @@ namespace Models
     public class Team : BaseModel
     {
         private int _teamID = 0;
-        private ObservableCollection<Player> _players = new ObservableCollection<Player>();
+        private ObservableCollection<TeamPlayer> _players = new ObservableCollection<TeamPlayer>();
         private string _teamName = string.Empty;
 
         [Key]
@@ -21,12 +21,12 @@ namespace Models
                 RaisePropertyChanged("TeamID");
             }
         }
-        public virtual ICollection<Player> Players
+        public virtual ICollection<TeamPlayer> Players
         {
             get { return _players; }
             set
             {
-                _players = value as ObservableCollection<Player>;
+                _players = value as ObservableCollection<TeamPlayer>;
                 RaisePropertyChanged("Players");
             }
         }

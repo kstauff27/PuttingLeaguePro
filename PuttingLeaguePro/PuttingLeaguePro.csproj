@@ -73,6 +73,9 @@
     <Compile Include="EditRoundScoresView.xaml.cs">
       <DependentUpon>EditRoundScoresView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScoringLeaders.xaml.cs">
+      <DependentUpon>ScoringLeaders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScoringView.xaml.cs">
       <DependentUpon>ScoringView.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ScoringLeaders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ScoringView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

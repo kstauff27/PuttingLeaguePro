@@ -357,7 +357,7 @@ namespace ViewModels
             foreach(Team team in _teams)
             {
                 TeamScore teamScore = new TeamScore() { TeamID = team.TeamID, CurrentScore = 0, Order = order };
-                teamScore.TeamName = team.Players.Count % 2 == 0 ? string.Format("{0} / {1}", team.Players.Select(e => e.Name).ToArray()) : team.Players.FirstOrDefault().Name;
+                teamScore.TeamName = team.Players.Count % 2 == 0 ? string.Format("{0} / {1}", team.Players.Select(e => e.PlayerName).ToArray()) : team.Players.FirstOrDefault().PlayerName;
 
                 foreach(PointValue pv in _pointValues)
                 {
