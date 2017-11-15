@@ -197,7 +197,14 @@ namespace ViewModels
 
         private void deleteRoundScore()
         {
-            _dataManager.Entry(_selectedRoundScore).State = EntityState.Deleted;
+            if (_dataManager.Entry(_selectedRoundScore).State == EntityState.Added)
+            {
+                _dataManager.Entry(_selectedRoundScore).State = EntityState.Detached;
+                _allRoundScores.Remove(_selectedRoundScore);
+            }
+            else
+                _dataManager.Entry(_selectedRoundScore).State = EntityState.Deleted;
+
             _roundScores.Remove(_selectedRoundScore);
         }
         private bool deleteRoundScoreCanExecute()

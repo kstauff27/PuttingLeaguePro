@@ -246,15 +246,24 @@ namespace ViewModels
             if(_counter % _teams.Count == 0)
                 _roundNumber++;
 
-            for(int i = 0; i < _pointValuesForCurrentTurn.Count; i++)
+            if (_pointValuesForCurrentTurn.All(e => e == false))
             {
-                if(_pointValuesForCurrentTurn[i])
+                RoundScore rs = new RoundScore() { GameID = _game.GameID, TeamID = _currentTeamScore.TeamID, Round = _roundNumber, Points = 0 };
+                _dataManager.RoundScores.Add(rs);
+                _dataManager.SaveChanges();
+            }
+            else
+            {
+                for (int i = 0; i < _pointValuesForCurrentTurn.Count; i++)
                 {
-                    RoundScore rs = new RoundScore() { GameID = _game.GameID, TeamID = _currentTeamScore.TeamID, Round = _roundNumber };
-                    rs.Points = _pointValues[i].Points;
+                    if (_pointValuesForCurrentTurn[i])
+                    {
+                        RoundScore rs = new RoundScore() { GameID = _game.GameID, TeamID = _currentTeamScore.TeamID, Round = _roundNumber };
+                        rs.Points = _pointValues[i].Points;
 
-                    _dataManager.RoundScores.Add(rs);
-                    _dataManager.SaveChanges();
+                        _dataManager.RoundScores.Add(rs);
+                        _dataManager.SaveChanges();
+                    }
                 }
             }
 
@@ -294,6 +303,8 @@ namespace ViewModels
 
             foreach(TeamScore teamScore in _teamScores)
                 RefreshTeamScore(teamScore.TeamID);
+
+            RefreshPointValuesEnabled();
         }
         private bool editSelectedTeamScoreCanExecute()
         {
